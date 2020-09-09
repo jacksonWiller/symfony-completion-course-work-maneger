@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="users")
  */
 class User implements UserInterface
 {
@@ -33,6 +34,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $registration;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $name;
 
     public function getId(): ?int
     {
@@ -110,5 +121,29 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getRegistration(): ?int
+    {
+        return $this->registration;
+    }
+
+    public function setRegistration(int $registration): self
+    {
+        $this->registration = $registration;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }
