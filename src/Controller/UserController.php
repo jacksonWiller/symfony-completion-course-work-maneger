@@ -24,8 +24,20 @@ class UserController extends AbstractController
             ->getRepository(User::class)
             ->findAll();
 
-        return $this->render('user/user.html.twig', [
+        return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
     }
+
+    /**
+     * @Route("/delete-user/{id}", name="delete_user")
+     */
+    public function deleteCategory(User $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('user_index');
+    }
+
 }

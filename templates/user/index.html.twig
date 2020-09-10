@@ -27,7 +27,7 @@
                   <td>{{ users.name }}</td>
                   <td><label class="badge badge-success">Approved</label></td>
                   <td><a href="#" class="btn btn-primary btn-sm">Manage</a></td>
-                  <td><a href="#" class="btn btn-danger btn-sm">Remove</a></td>
+                  <td><a href="{{path('delete_user',{'id':users.id})}}" class="btn btn-danger btn-sm">Remove</a></td>
                 </tr>
               {% else %}
             <tr>
