@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 /**
@@ -82,6 +83,24 @@ class UserController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
         return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $helper)
+    {
+        return $this->render('front/login.html.twig', [
+            'error' => $helper->getLastAuthenticationError()
+            ]);
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout() : void
+    {
+        throw new \Exception('This should never be reached!');
     }
 
 }
