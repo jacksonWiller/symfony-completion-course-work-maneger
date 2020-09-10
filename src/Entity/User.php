@@ -36,7 +36,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", unique=true)
      */
     private $registration;
 
@@ -44,6 +44,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=45)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $profile;
 
     public function getId(): ?int
     {
@@ -143,6 +148,18 @@ class User implements UserInterface
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getProfile(): ?string
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(string $profile): self
+    {
+        $this->profile = $profile;
 
         return $this;
     }

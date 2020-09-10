@@ -29,6 +29,7 @@ class UserController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/delete-user/{id}", name="delete_user")
      */
