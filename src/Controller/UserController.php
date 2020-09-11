@@ -85,22 +85,4 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index');
     }
 
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login(AuthenticationUtils $helper)
-    {
-        return $this->render('login/index.html.twig', [
-            'error' => $helper->getLastAuthenticationError()
-            ]);
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logout() : void
-    {
-        throw new \Exception('This should never be reached!');
-    }
-
 }
