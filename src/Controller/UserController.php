@@ -90,7 +90,7 @@ class UserController extends AbstractController
      */
     public function login(AuthenticationUtils $helper)
     {
-        return $this->render('front/login.html.twig', [
+        return $this->render('login/index.html.twig', [
             'error' => $helper->getLastAuthenticationError()
             ]);
     }
