@@ -39,14 +39,9 @@ class Work
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="student")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $professor;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     */
-    private $student;
 
     public function getId(): ?int
     {
@@ -109,18 +104,6 @@ class Work
     public function setProfessor(?User $professor): self
     {
         $this->professor = $professor;
-
-        return $this;
-    }
-
-    public function getStudent(): ?User
-    {
-        return $this->student;
-    }
-
-    public function setStudent(?User $student): self
-    {
-        $this->student = $student;
 
         return $this;
     }
