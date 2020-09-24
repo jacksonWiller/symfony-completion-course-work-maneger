@@ -11,14 +11,24 @@ class WorkFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        foreach ($this->WorkData() as [$name, $area, $topic, $description]) {
+        foreach ($this->WorkData() as [$name, $area, $topic, $description, $user_id]) {
             $work = new Work();
             
+
             $work-> setName($name);  
             $work-> setArea($area);
             $work-> setTopic($topic);
             $work-> setDescription($description);
+
             
+            
+            $user = $manager->getRepository(User::class)->find($user_id);
+
+           $work-> setUser($user);
+            
+            var_dump($user_id);
+            var_dump($user);exit;
+
             $manager->persist($work);
         }
         $manager->flush();
@@ -28,7 +38,7 @@ class WorkFixtures extends Fixture
     {
         return [
 
-            ['name ', 'electrical engineer', 'magnetic waves', 'this a description of a work']
+            ['name ', 'electrical engineer', 'magnetic waves', 'this a description of a work',15]
             
         ];
     }

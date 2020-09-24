@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,6 +51,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=15)
      */
     private $profile;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Work::class, mappedBy="User")
+     */
+    private $works;
+
+    public function __construct()
+    {
+        $this->works = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -160,6 +172,37 @@ class User implements UserInterface
     public function setProfile(string $profile): self
     {
         $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Work[]
+     */
+    public function getWorks(): Collection
+    {
+        return $this->works;
+    }
+
+    public function addWork(Work $work): self
+    {
+        if (!$this->works->contains($work)) {
+            $this->works[] = $work;
+            $work->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWork(Work $work): self
+    {
+        if ($this->works->contains($work)) {
+            $this->works->removeElement($work);
+            // set the owning side to null (unless already changed)
+            if ($work->getUser() === $this) {
+                $work->setUser(null);
+            }
+        }
 
         return $this;
     }
